@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Pip-Boy — Fallout 4</title>
+<style>
+body{background:#000;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;font-family:'Courier New',monospace}.pip-boy-frame{width:360px;height:360px;border:10px solid #555;border-radius:20px;box-shadow:0 0 20px rgba(0,255,0,.4);overflow:hidden;background:#001a00;position:relative}.scan-lines{position:absolute;top:0;left:0;width:100%;height:100%;background:repeating-linear-gradient(to bottom,transparent,transparent 2px,rgba(0,0,0,.1) 2px,rgba(0,0,0,.1) 4px);pointer-events:none;z-index:10}.screen-content{position:absolute;top:0;left:0;width:100%;height:100%;padding:10px;box-sizing:border-box;color:#0f0;font-size:14px;line-height:1.4;z-index:5}.screen-bg{width:100%;height:100%;object-fit:cover;opacity:.7;position:absolute;top:0;left:0;z-index:1}.info-panel{position:absolute;top:10px;left:10px;z-index:20}.time{font-size:24px;font-weight:bold;margin-bottom:4px}.date{font-size:14px;margin-bottom:4px}.day-week{font-size:12px;opacity:.8;margin-bottom:12px}.status-item{margin-bottom:8px}.status-label{font-size:12px;opacity:.8}.status-value{font-size:20px;font-weight:bold}.button-bar{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:20}.pip-button{width:45px;height:24px;background:#002200;border:1px solid #0f0;color:#0f0;font-family:'Courier New',monospace;font-size:9px;font-weight:bold;cursor:pointer;text-align:center;line-height:22px;letter-spacing:1px;transition:all .2s}.pip-button:hover{background:#004400;box-shadow:0 0 8px #0f0}.pip-button:active{background:#00ff00;color:#000}.tab-title{font-size:18px;font-weight:bold;margin-bottom:10px;text-align:center;text-decoration:underline}.inventory-list,.data-list,.radio-list{list-style:none;padding:0;margin:0 0 15px 0}.inventory-list li,.data-list li,.radio-list li{padding:2px 0;border-bottom:1px dotted #0f0;cursor:pointer}.back-button{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);width:80px;height:24px;background:#002200;border:1px solid #0f0;color:#0f0;font-family:'Courier New',monospace;font-size:12px;font-weight:bold;cursor:pointer;text-align:center;line-height:22px;letter-spacing:1px}.back-button:hover{background:#004400;box-shadow:0 0 8px #0f0}.hidden{display:none!important}.radio-waves{position:absolute;top:15%;left:50%;transform:translateX(-50%);width:140px;height:140px}.wave{position:absolute;top:50%;left:50%;border-radius:50%;border:1px solid #0f0;transform:translate(-50%,-50%);opacity:.5;animation:pulse 3s infinite}.wave.active{border-color:#0f0;opacity:.8;animation:pulse-active 3s infinite}.wave:nth-child(2){animation-delay:.5s}.wave:nth-child(3){animation-delay:1s}.wave:nth-child(4){animation-delay:1.5s}@keyframes pulse{0%{width:10px;height:10px;opacity:.5}100%{width:140px;height:140px;opacity:0}}@keyframes pulse-active{0%{width:10px;height:10px;opacity:.8}100%{width:140px;height:140px;opacity:.3}}.antenna{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#0f0;font-size:24px}.map-svg{width:100%;height:100%}.map-path{fill:none;stroke:#0f0;stroke-width:1}.map-dot{fill:#0f0}.map-label{fill:#0f0;font-size:8px;font-family:'Courier New'}
+</style>
+</head>
+<body>
+<div class="pip-boy-frame">
+<div class="scan-lines"></div>
+<div class="screen-content" id="main-screen">
+<img src="https://i.ibb.co/DHHFmjpt/Fallout-Possibly-Hinted-Pip-Boy-Trademark-Filed.jpg" class="screen-bg" alt="Pip-Boy">
+<div class="info-panel">
+<div class="time" id="current-time">--:--</div>
+<div class="date" id="current-date">--.--.----</div>
+<div class="day-week" id="current-day">--</div>
+<div class="status-item"><div class="status-label">ЗДОРОВ'Я</div><div class="status-value" id="health-value">100%</div></div>
+<div class="status-item"><div class="status-label">РАДІАЦІЯ</div><div class="status-value" id="rad-value">0%</div></div>
+</div>
+<div class="button-bar">
+<div class="pip-button" id="btn-inv">INV</div>
+<div class="pip-button" id="btn-data">DATA</div>
+<div class="pip-button" id="btn-map">MAP</div>
+<div class="pip-button" id="btn-radio">RADIO</div>
+</div>
+</div>
+<div class="screen-content hidden" id="tab-inv">
+<div class="tab-title">ІНВЕНТАР</div>
+<ul class="inventory-list">
+<li>Пістолет 10мм — 1 шт.</li><li>Боєприпаси 10мм — 50 шт.</li><li>Аптечка — 3 шт.</li><li>Медпрепарат — 2 шт.</li><li>Ключ від сховища — 1 шт.</li><li>Голка радіації — 1 шт.</li><li>Їжа — 4 шт.</li><li>Вода — 3 шт.</li>
+</ul>
+<div class="back-button" id="back-from-inv">НАЗАД</div>
+</div>
+<div class="screen-content hidden" id="tab-data">
+<div class="tab-title">ДАНІ</div>
+<ul class="data-list">
+<li>Запис 01: Вхід до сховища</li><li>Запис 02: Перший контакт</li><li>Запис 03: Пошук брата</li><li>Запис 04: Зустріч з Містером Генчменом</li><li>Лист: Від Люка — "Бережи себе"</li><li>Карта: Пустка — регіон Альфа</li><li>Примітка: Уникай рейдерів!</li>
+</ul>
+<div class="back-button" id="back-from-data">НАЗАД</div>
+</div>
+<div class="screen-content hidden" id="tab-map">
+<div class="tab-title">МАПА</div>
+<div style="width:100%;height:calc(100% - 60px);overflow:hidden;position:relative">
+<svg class="map-svg" viewBox="0 0 340 280" preserveAspectRatio="xMidYMid meet">
+<rect width="340" height="280" fill="#001a00"/>
+<path d="M20,150 C40,120 80,100 120,110 C160,120 200,90 240,100 C280,110 300,140 320,180 L320,280 L0,280 L0,180 C10,170 15,160 20,150 Z" class="map-path"/>
+<path d="M100,100 Q170,130 220,90" class="map-path" stroke-dasharray="2,2"/>
+<path d="M60,130 L120,160" class="map-path"/><path d="M120,160 L180,90" class="map-path"/>
+<circle cx="60" cy="130" r="4" class="map-dot"/><text x="65" y="125" class="map-label">Сховище 111</text>
+<rect x="180" y="90" width="6" height="6" class="map-dot"/><text x="188" y="88" class="map-label">Бостон</text>
+<circle cx="120" cy="160" r="3" class="map-dot"/><text x="125" y="155" class="map-label">Містечко</text>
+<polygon points="250,180 255,185 250,190" class="map-dot"/><text x="258" y="185" class="map-label">Рейдери</text>
+<circle cx="200" cy="140" r="3" class="map-dot"/><text x="205" y="135" class="map-label">Кембридж</text>
+<circle cx="100" cy="140" r="5" fill="none" stroke="#0f0" stroke-width="2"/><circle cx="100" cy="140" r="2" class="map-dot"/>
+<text x="10" y="20" class="map-label">ПУСТКА</text>
+</svg>
+</div>
+<div class="back-button" id="back-from-map">НАЗАД</div>
+</div>
+<div class="screen-content hidden" id="tab-radio">
+<div class="tab-title">РАДІО</div>
+<div style="position:relative;height:calc(100% - 60px)">
+<div class="radio-waves">
+<div class="wave active"></div><div class="wave active"></div><div class="wave active"></div><div class="wave active"></div>
+<div class="antenna">📡</div>
+</div>
+<ul class="radio-list" style="position:absolute;bottom:0;width:100%;padding:0;margin:0">
+<li class="radio-station" data-station="gnr">▶️ Galaxy News Radio</li>
+<li class="radio-station" data-station="dcr">▶️ Diamond City Radio</li>
+<li class="radio-station" data-station="er">▶️ Enclave Radio</li>
+<li class="radio-station" data-station="tms">▶️ The Mysterious Stranger</li>
+<li class="radio-station" data-station="vtb">▶️ Vault-Tec Broadcast</li>
+</ul>
+</div>
+<div class="back-button" id="back-from-radio">НАЗАД</div>
+</div>
+</div>
+<script>
+const monthsUk=['Січня','Лютого','Березня','Квітня','Травня','Червня','Липня','Серпня','Вересня','Жовтня','Листопада','Грудня'];const daysUk=['Неділя','Понеділок','Вівторок','Середа','Четвер','П’ятниця','Субота'];function updateClock(){const now=new Date();document.getElementById('current-time').textContent=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;document.getElementById('current-date').textContent=`${now.getDate()} ${monthsUk[now.getMonth()]} ${now.getFullYear()}`;document.getElementById('current-day').textContent=daysUk[now.getDay()];}function showTab(t){document.querySelectorAll('.screen-content').forEach(e=>e.classList.add('hidden'));document.getElementById(t).classList.remove('hidden');}function hideTab(){document.querySelectorAll('.screen-content').forEach(e=>e.classList.add('hidden'));document.getElementById('main-screen').classList.remove('hidden');}document.getElementById('btn-inv').addEventListener('click',()=>showTab('tab-inv'));document.getElementById('btn-data').addEventListener('click',()=>showTab('tab-data'));document.getElementById('btn-map').addEventListener('click',()=>showTab('tab-map'));document.getElementById('btn-radio').addEventListener('click',()=>showTab('tab-radio'));document.getElementById('back-from-inv').addEventListener('click',hideTab);document.getElementById('back-from-data').addEventListener('click',hideTab);document.getElementById('back-from-map').addEventListener('click',hideTab);document.getElementById('back-from-radio').addEventListener('click',hideTab);let currentStation=localStorage.getItem('pipboy_radio')||'gnr';function updateRadioSelection(){document.querySelectorAll('.radio-station').forEach(e=>{if(e.dataset.station===currentStation){e.style.color='#0f0';e.style.fontWeight='bold';e.style.textShadow='0 0 5px #0f0';}else{e.style.color='';e.style.fontWeight='';e.style.textShadow='';}});}document.querySelectorAll('.radio-station').forEach(e=>{e.addEventListener('click',()=>{currentStation=e.dataset.station;localStorage.setItem('pipboy_radio',currentStation);updateRadioSelection();});});document.getElementById('btn-radio').addEventListener('click',()=>setTimeout(updateRadioSelection,50));setInterval(updateClock,1000);updateClock();updateRadioSelection();
+</script>
+</body>
+</html>
